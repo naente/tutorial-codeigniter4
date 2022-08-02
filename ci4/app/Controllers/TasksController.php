@@ -8,6 +8,6 @@ class TasksController extends BaseController
 {
     public function index()
     {
-        echo view('Tasks/index');
+        return view('Tasks/index');
     }
 }
