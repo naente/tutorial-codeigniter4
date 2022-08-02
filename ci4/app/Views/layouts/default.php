@@ -6,3 +6,6 @@
     <title>Title</title>
 </head>
 <body>
+    <?php $this->renderSection('content'); ?>
+</body>
+</html>

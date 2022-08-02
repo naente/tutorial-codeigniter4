@@ -1,4 +1,4 @@
-<?php echo $this->include('header'); ?>
-<h1>Welcome</h1>
-</body>
-</html>
+<?php $this->extend('layouts/default'); ?>
+<?php $this->section('content'); ?>
+<h1>Tasks</h1>
+<?php $this->endSection(); ?>
