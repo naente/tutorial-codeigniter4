@@ -3,15 +3,14 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\TasksModel;
 
 class TasksController extends BaseController
 {
     public function index()
     {
-        $data = [
-            ['id' => 1, 'description' => 'First task'],
-            ['id' => 2, 'description' => 'Second task'],
-        ];
+        $model = new TasksModel;
+        $data = $model->findAll();
 
         return view('Tasks/index', ['tasks' => $data]);
     }
