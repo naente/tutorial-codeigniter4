@@ -10,8 +10,8 @@ class TasksController extends BaseController
     public function index()
     {
         $model = new TasksModel;
-        $data = $model->findAll();
+        $tasks = $model->findAll();
 
-        return view('Tasks/index', ['tasks' => $data]);
+        return view('Tasks/index', ['tasks' => $tasks]);
     }
 }
