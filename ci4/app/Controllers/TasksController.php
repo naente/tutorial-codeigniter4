@@ -14,4 +14,12 @@ class TasksController extends BaseController
 
         return view('Tasks/index', ['tasks' => $tasks]);
     }
+
+    public function show($id)
+    {
+        $model = new TasksModel;
+        $task = $model->find($id);
+
+        return view('Tasks/show', ['task' => $task]);
+    }
 }
