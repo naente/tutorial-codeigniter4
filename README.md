@@ -1,1 +1,1 @@
-# tutorial_codeigniter4
+# tutorial-codeigniter4
