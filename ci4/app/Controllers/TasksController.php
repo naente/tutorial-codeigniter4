@@ -36,9 +36,12 @@ class TasksController extends BaseController
         ]);
 
         if ($result === false) {
-            return redirect()->back()->with('errors', $model->errors());
+            return redirect()->back()
+                ->with('errors', $model->errors())
+                ->with('warning', 'Invalid data');
         } else {
-            return redirect()->to('/tasks/show/' . $result);
+            return redirect()->to('/tasks/show/' . $result)
+                ->with('info', 'Created successfully');
         }
     }
 }
