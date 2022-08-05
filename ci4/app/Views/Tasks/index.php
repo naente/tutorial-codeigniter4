@@ -7,7 +7,7 @@
         <?php foreach ($tasks as $task) { ?>
             <li>
                 <a href="<?php echo site_url('/tasks/show/' . $task['id']) ?>">
-                    <?php echo $task['description']; ?>
+                    <?php echo esc($task['description']); ?>
                 </a>
             </li>
         <?php } ?>
