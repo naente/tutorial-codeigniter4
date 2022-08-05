@@ -38,6 +38,7 @@ $routes->set404Override();
 $routes->get('/', 'Home::index');
 $routes->get('/tasks', 'TasksController::index');
 $routes->get('/tasks/show/(:num)', 'TasksController::show/$1');
+$routes->get('/tasks/create', 'TasksController::create');
 
 /*
  * --------------------------------------------------------------------

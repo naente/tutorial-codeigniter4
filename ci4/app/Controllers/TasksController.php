@@ -22,4 +22,9 @@ class TasksController extends BaseController
 
         return view('Tasks/show', ['task' => $task]);
     }
+
+    public function create()
+    {
+        return view('Tasks/create');
+    }
 }
