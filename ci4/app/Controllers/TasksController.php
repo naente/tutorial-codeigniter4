@@ -31,8 +31,14 @@ class TasksController extends BaseController
     public function store()
     {
         $model = new TasksModel;
-        $model->insert([
+        $result = $model->insert([
             'description' => $this->request->getPost('description')
         ]);
+
+        if ($result === false) {
+            return redirect()->back()->with('errors', $model->errors());
+        } else {
+            return redirect()->to('/tasks/show/' . $result);
+        }
     }
 }

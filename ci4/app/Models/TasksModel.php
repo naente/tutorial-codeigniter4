@@ -8,4 +8,8 @@ class TasksModel extends Model
 {
     protected $table = 'tasks';
     protected $allowedFields = ['description'];
+
+    protected $validationRules = [
+        'description' => 'required'
+    ];
 }
