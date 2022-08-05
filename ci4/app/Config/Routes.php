@@ -39,6 +39,7 @@ $routes->get('/', 'Home::index');
 $routes->get('/tasks', 'TasksController::index');
 $routes->get('/tasks/show/(:num)', 'TasksController::show/$1');
 $routes->get('/tasks/create', 'TasksController::create');
+$routes->post('/tasks/store', 'TasksController::store');
 
 /*
  * --------------------------------------------------------------------

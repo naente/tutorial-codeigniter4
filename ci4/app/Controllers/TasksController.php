@@ -27,4 +27,12 @@ class TasksController extends BaseController
     {
         return view('Tasks/create');
     }
+
+    public function store()
+    {
+        $model = new TasksModel;
+        $model->insert([
+            'description' => $this->request->getPost('description')
+        ]);
+    }
 }
