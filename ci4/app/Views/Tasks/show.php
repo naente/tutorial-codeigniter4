@@ -2,6 +2,7 @@
 <?php $this->section('title'); ?>Task<?php $this->endSection(); ?>
 <?php $this->section('content'); ?>
     <h1>Task</h1>
+    <a href="<?php echo site_url('/tasks') ?>">Back</a>
     <dl>
         <dt>ID</dt>
         <dd><?php echo $task['id']; ?></dd>
