@@ -13,4 +13,5 @@
         <dt>Updated at</dt>
         <dd><?php echo $task['updated_at']; ?></dd>
     </dl>
+    <a href="<?php echo site_url('/tasks/' . $task['id'] . '/edit') ?>">Edit</a>
 <?php $this->endSection(); ?>
