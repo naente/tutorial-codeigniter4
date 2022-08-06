@@ -41,6 +41,7 @@ $routes->get('/tasks/(:num)', 'TasksController::show/$1');
 $routes->get('/tasks/create', 'TasksController::create');
 $routes->post('/tasks/store', 'TasksController::store');
 $routes->get('/tasks/(:num)/edit', 'TasksController::edit/$1');
+$routes->post('/tasks/(:num)/update', 'TasksController::update/$1');
 
 /*
  * --------------------------------------------------------------------

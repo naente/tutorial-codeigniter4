@@ -38,7 +38,8 @@ class TasksController extends BaseController
         if ($result === false) {
             return redirect()->back()
                 ->with('errors', $model->errors())
-                ->with('warning', 'Invalid data');
+                ->with('warning', 'Invalid data')
+                ->withInput();
         } else {
             return redirect()->to('/tasks/show/' . $result)
                 ->with('info', 'Created successfully');
@@ -51,5 +52,23 @@ class TasksController extends BaseController
         $task = $model->find($id);
 
         return view('Tasks/edit', ['task' => $task]);
+    }
+
+    public function update($id)
+    {
+        $model = new TasksModel;
+        $result = $model->update($id, [
+            'description' => $this->request->getPost('description')
+        ]);
+
+        if ($result === true) {
+            return redirect()->to('/tasks/' . $id)
+                ->with('info', 'Updated successfully');
+        } else {
+            return redirect()->back()
+                ->with('errors', $model->errors())
+                ->with('warning', 'Invalid data')
+                ->withInput();
+        }
     }
 }
