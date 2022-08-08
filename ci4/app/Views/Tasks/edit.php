@@ -9,9 +9,9 @@
         <?php } ?>
     </ul>
     <?php } ?>
-    <?php echo form_open('/tasks/' . $task['id'] . '/update') ?>
+    <?php echo form_open('/tasks/' . $task->id . '/update') ?>
         <?php echo $this->include('Tasks/form'); ?>
         <button>Save</button>
-        <a href="<?php echo site_url('/tasks/' . $task['id']) ?>">Back</a>
+        <a href="<?php echo site_url('/tasks/' . $task->id) ?>">Back</a>
     </form>
 <?php $this->endSection(); ?>

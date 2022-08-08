@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Entities\Task;
 use App\Models\TasksModel;
 
 class TasksController extends BaseController
@@ -25,8 +26,10 @@ class TasksController extends BaseController
 
     public function create()
     {
+        $task = new Task;
+
         return view('Tasks/create', [
-            'task' => ['description' => '']
+            'task' => $task
         ]);
     }
 
