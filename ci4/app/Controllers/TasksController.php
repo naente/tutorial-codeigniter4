@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Entities\Task;
+use App\Entities\Task as TaskEntity;
 use App\Models\TasksModel;
 
 class TasksController extends BaseController
@@ -26,7 +26,7 @@ class TasksController extends BaseController
 
     public function create()
     {
-        $task = new Task;
+        $task = new TaskEntity;
 
         return view('Tasks/create', [
             'task' => $task
@@ -36,18 +36,17 @@ class TasksController extends BaseController
     public function store()
     {
         $model = new TasksModel;
-        $result = $model->insert([
-            'description' => $this->request->getPost('description')
-        ]);
 
-        if ($result === false) {
+        $task = new TaskEntity($this->request->getPost());
+
+        if ($model->insert($task)) {
+            return redirect()->to('/tasks/' . $model->insertID)
+                ->with('info', 'Created successfully');
+        } else {
             return redirect()->back()
                 ->with('errors', $model->errors())
                 ->with('warning', 'Invalid data')
                 ->withInput();
-        } else {
-            return redirect()->to('/tasks/show/' . $result)
-                ->with('info', 'Created successfully');
         }
     }
 
