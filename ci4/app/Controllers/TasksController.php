@@ -61,11 +61,18 @@ class TasksController extends BaseController
     public function update($id)
     {
         $model = new TasksModel;
-        $result = $model->update($id, [
-            'description' => $this->request->getPost('description')
-        ]);
 
-        if ($result === true) {
+        $task = $model->find($id);
+
+        $task->fill($this->request->getPost());
+
+        if (!$task->hasChanged()) {
+            return redirect()->back()
+                ->with('warning', 'Nothing to update')
+                ->withInput();
+        }
+
+        if ($model->save($task)) {
             return redirect()->to('/tasks/' . $id)
                 ->with('info', 'Updated successfully');
         } else {
