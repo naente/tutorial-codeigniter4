@@ -10,7 +10,7 @@ class TasksModel extends Model
     protected $table = 'tasks';
     protected $allowedFields = ['description'];
     protected $returnType = Task::class;
-
+    protected $useTimestamps = true;
     protected $validationRules = [
         'description' => 'required'
     ];
