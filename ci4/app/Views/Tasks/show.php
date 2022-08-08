@@ -14,4 +14,5 @@
         <dd><?php echo $task->updated_at; ?></dd>
     </dl>
     <a href="<?php echo site_url('/tasks/' . $task->id . '/edit') ?>">Edit</a>
+    <a href="<?php echo site_url('/tasks/' . $task->id . '/delete') ?>">Delete</a>
 <?php $this->endSection(); ?>

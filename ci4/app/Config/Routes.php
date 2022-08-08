@@ -42,6 +42,7 @@ $routes->get('/tasks/create', 'TasksController::create');
 $routes->post('/tasks/store', 'TasksController::store');
 $routes->get('/tasks/(:num)/edit', 'TasksController::edit/$1');
 $routes->post('/tasks/(:num)/update', 'TasksController::update/$1');
+$routes->match(['get', 'post'], '/tasks/(:num)/delete', 'TasksController::delete/$1');
 
 /*
  * --------------------------------------------------------------------
