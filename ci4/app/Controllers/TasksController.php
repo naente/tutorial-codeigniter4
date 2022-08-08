@@ -8,18 +8,23 @@ use App\Models\TasksModel;
 
 class TasksController extends BaseController
 {
+    private $model;
+
+    public function __construct()
+    {
+        $this->model = new TasksModel;
+    }
+
     public function index()
     {
-        $model = new TasksModel;
-        $tasks = $model->findAll();
+        $tasks = $this->model->findAll();
 
         return view('Tasks/index', ['tasks' => $tasks]);
     }
 
     public function show($id)
     {
-        $model = new TasksModel;
-        $task = $model->find($id);
+        $task = $this->model->find($id);
 
         return view('Tasks/show', ['task' => $task]);
     }
@@ -35,16 +40,14 @@ class TasksController extends BaseController
 
     public function store()
     {
-        $model = new TasksModel;
-
         $task = new TaskEntity($this->request->getPost());
 
-        if ($model->insert($task)) {
-            return redirect()->to('/tasks/' . $model->insertID)
+        if ($this->model->insert($task)) {
+            return redirect()->to('/tasks/' . $this->model->insertID)
                 ->with('info', 'Created successfully');
         } else {
             return redirect()->back()
-                ->with('errors', $model->errors())
+                ->with('errors', $this->model->errors())
                 ->with('warning', 'Invalid data')
                 ->withInput();
         }
@@ -52,17 +55,14 @@ class TasksController extends BaseController
 
     public function edit($id)
     {
-        $model = new TasksModel;
-        $task = $model->find($id);
+        $task = $this->model->find($id);
 
         return view('Tasks/edit', ['task' => $task]);
     }
 
     public function update($id)
     {
-        $model = new TasksModel;
-
-        $task = $model->find($id);
+        $task = $this->model->find($id);
 
         $task->fill($this->request->getPost());
 
@@ -72,12 +72,12 @@ class TasksController extends BaseController
                 ->withInput();
         }
 
-        if ($model->save($task)) {
+        if ($this->model->save($task)) {
             return redirect()->to('/tasks/' . $id)
                 ->with('info', 'Updated successfully');
         } else {
             return redirect()->back()
-                ->with('errors', $model->errors())
+                ->with('errors', $this->model->errors())
                 ->with('warning', 'Invalid data')
                 ->withInput();
         }
