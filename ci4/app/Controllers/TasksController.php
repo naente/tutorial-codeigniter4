@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Entities\Task as TaskEntity;
 use App\Models\TasksModel;
+use CodeIgniter\Exceptions\PageNotFoundException;
 
 class TasksController extends BaseController
 {
@@ -24,7 +25,7 @@ class TasksController extends BaseController
 
     public function show($id)
     {
-        $task = $this->model->find($id);
+        $task = $this->getTaskOr404($id);
 
         return view('Tasks/show', ['task' => $task]);
     }
@@ -55,14 +56,14 @@ class TasksController extends BaseController
 
     public function edit($id)
     {
-        $task = $this->model->find($id);
+        $task = $this->getTaskOr404($id);
 
         return view('Tasks/edit', ['task' => $task]);
     }
 
     public function update($id)
     {
-        $task = $this->model->find($id);
+        $task = $this->getTaskOr404($id);
 
         $task->fill($this->request->getPost());
 
@@ -81,5 +82,16 @@ class TasksController extends BaseController
                 ->with('warning', 'Invalid data')
                 ->withInput();
         }
+    }
+
+    private function getTaskOr404($id)
+    {
+        $task = $this->model->find($id);
+
+        if ($task === null) {
+            throw new PageNotFoundException("Task with id $id not found");
+        }
+
+        return $task;
     }
 }
