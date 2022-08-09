@@ -17,11 +17,7 @@
         <?php } ?>
         <?php echo form_open('/animals/store'); ?>
         <?php echo csrf_field(); ?>
-        <div class="mb-3">
-            <label for="name" class="form-label">名前</label>
-            <input type="text" class="form-control" name="name" id="name"
-                   value="<?php echo old('name', esc($animal['name'])); ?>">
-        </div>
+        <?php echo $this->include('Animals/form'); ?>
         <a class="btn btn-secondary" href="<?php echo site_url('/animals'); ?>">戻る</a>
         <button class="btn btn-primary">登録</button>
         </form>

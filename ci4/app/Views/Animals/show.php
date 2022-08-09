@@ -8,16 +8,7 @@
                 <?php echo session('info'); ?>
             </div>
         <?php } ?>
-        <dl>
-            <dt>ID</dt>
-            <dd><?php echo $animal['id']; ?></dd>
-            <dt>名前</dt>
-            <dd><?php echo esc($animal['name']); ?></dd>
-            <dt>作成日時</dt>
-            <dd><?php echo $animal['created_at']; ?></dd>
-            <dt>更新日時</dt>
-            <dd><?php echo $animal['updated_at']; ?></dd>
-        </dl>
+        <?php echo $this->include('Animals/view'); ?>
         <a class="btn btn-secondary" href="<?php echo site_url('/animals'); ?>">戻る</a>
         <a class="btn btn-primary" href="<?php echo site_url('/animals/edit/' . $animal['id']); ?>">編集</a>
         <a class="btn btn-danger" href="<?php echo site_url('/animals/delete/' . $animal['id']); ?>">削除</a>
