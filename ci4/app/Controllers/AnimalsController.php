@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\AnimalsModel;
+use CodeIgniter\Exceptions\PageNotFoundException;
 
 class AnimalsController extends BaseController
 {
@@ -23,7 +24,7 @@ class AnimalsController extends BaseController
 
     public function show($id)
     {
-        $animal = $this->model->find($id);
+        $animal = $this->getAnimal($id);
 
         return view('Animals/show', ['animal' => $animal]);
     }
@@ -54,7 +55,7 @@ class AnimalsController extends BaseController
 
     public function edit($id)
     {
-        $animal = $this->model->find($id);
+        $animal = $this->getAnimal($id);
 
         return view('Animals/edit', ['animal' => $animal]);
     }
@@ -78,7 +79,7 @@ class AnimalsController extends BaseController
 
     public function delete($id)
     {
-        $animal = $this->model->find($id);
+        $animal = $this->getAnimal($id);
 
         if ($this->request->getMethod() === 'post') {
             $this->model->delete($id);
@@ -86,5 +87,16 @@ class AnimalsController extends BaseController
                 ->with('info', '削除しました');
         }
         return view('Animals/delete', ['animal' => $animal]);
+    }
+
+    private function getAnimal($id)
+    {
+        $animal = $this->model->find($id);
+
+        if ($animal === null) {
+            throw new PageNotFoundException();
+        }
+
+        return $animal;
     }
 }
