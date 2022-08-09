@@ -44,6 +44,14 @@ $routes->get('/tasks/(:num)/edit', 'TasksController::edit/$1');
 $routes->post('/tasks/(:num)/update', 'TasksController::update/$1');
 $routes->match(['get', 'post'], '/tasks/(:num)/delete', 'TasksController::delete/$1');
 
+$routes->get('/animals', 'AnimalsController::index');
+$routes->get('/animals/show/(:num)', 'AnimalsController::show/$1');
+$routes->get('/animals/create', 'AnimalsController::create');
+$routes->post('/animals/store', 'AnimalsController::store');
+$routes->get('/animals/edit/(:num)', 'AnimalsController::edit/$1');
+$routes->post('/animals/update/(:num)', 'AnimalsController::update/$1');
+$routes->match(['get', 'post'], '/animals/delete/(:num)', 'AnimalsController::delete/$1');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
