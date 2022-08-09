@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Entities\AnimalEntity;
 use App\Models\AnimalsModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 
@@ -31,25 +32,25 @@ class AnimalsController extends BaseController
 
     public function create()
     {
+        $animal = new AnimalEntity;
+
         return view('Animals/create', [
-            'animal' => ['name' => '']
+            'animal' => $animal
         ]);
     }
 
     public function store()
     {
-        $result = $this->model->insert([
-            'name' => $this->request->getPost('name')
-        ]);
+        $animal = new AnimalEntity($this->request->getPost());
 
-        if ($result === false) {
+        if ($this->model->insert($animal)) {
+            return redirect()->to('/animals/show/' . $this->model->getInsertID())
+                ->with('info', '登録しました');
+        } else {
             return redirect()->back()
                 ->with('errors', $this->model->errors())
                 ->with('warning', 'エラー')
                 ->withInput();
-        } else {
-            return redirect()->to('/animals/show/' . $result)
-                ->with('info', '登録しました');
         }
     }
 
@@ -62,11 +63,17 @@ class AnimalsController extends BaseController
 
     public function update($id)
     {
-        $result = $this->model->update($id, [
-            'name' => $this->request->getPost('name')
-        ]);
+        $animal = $this->getAnimal($id);
 
-        if ($result === true) {
+        $animal->fill($this->request->getPost());
+
+        if (!$animal->hasChanged()) {
+            return redirect()->back()
+                ->with('warning', '更新箇所はありません')
+                ->withInput();
+        }
+
+        if ($this->model->save($animal)) {
             return redirect()->to('/animals/show/' . $id)
                 ->with('info', '更新しました');
         } else {

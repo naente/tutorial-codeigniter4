@@ -10,13 +10,14 @@ class AnimalsModel extends Model
     protected $table            = 'animals';
     protected $primaryKey       = 'id';
     protected $returnType       = AnimalEntity::class;
-    protected $allowedFields    = ['name'];
+    protected $allowedFields    = ['name', 'price'];
 
     // Dates
     protected $useTimestamps = true;
 
     // Validation
     protected $validationRules      = [
-        'name' => 'required'
+        'name' => 'required',
+        'price' => 'required|is_natural'
     ];
 }
