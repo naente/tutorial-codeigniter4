@@ -13,8 +13,8 @@
             <ul>
                 <?php foreach ($animals as $animal) { ?>
                     <li>
-                        <a href="<?php echo site_url('/animals/show/' . $animal['id']); ?>">
-                            <?php echo esc($animal['name']); ?>
+                        <a href="<?php echo site_url('/animals/show/' . $animal->id); ?>">
+                            <?php echo esc($animal->name); ?>
                         </a>
                     </li>
                 <?php } ?>

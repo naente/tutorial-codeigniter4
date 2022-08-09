@@ -15,10 +15,10 @@
                 <?php } ?>
             </ul>
         <?php } ?>
-        <?php echo form_open('/animals/update/' . $animal['id']); ?>
+        <?php echo form_open('/animals/update/' . $animal->id); ?>
         <?php echo csrf_field(); ?>
         <?php echo $this->include('Animals/form'); ?>
-        <a class="btn btn-secondary" href="<?php echo site_url('/animals/show/' . $animal['id']); ?>">戻る</a>
+        <a class="btn btn-secondary" href="<?php echo site_url('/animals/show/' . $animal->id); ?>">戻る</a>
         <button class="btn btn-primary">更新</button>
         </form>
     </div>

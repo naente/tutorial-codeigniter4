@@ -7,18 +7,23 @@ use App\Models\AnimalsModel;
 
 class AnimalsController extends BaseController
 {
+    private $model;
+
+    public function __construct()
+    {
+        $this->model = new AnimalsModel;
+    }
+
     public function index()
     {
-        $model = new AnimalsModel;
-        $animals = $model->findAll();
+        $animals = $this->model->findAll();
 
         return view('Animals/index', ['animals' => $animals]);
     }
 
     public function show($id)
     {
-        $model = new AnimalsModel;
-        $animal = $model->find($id);
+        $animal = $this->model->find($id);
 
         return view('Animals/show', ['animal' => $animal]);
     }
@@ -32,14 +37,13 @@ class AnimalsController extends BaseController
 
     public function store()
     {
-        $model = new AnimalsModel;
-        $result = $model->insert([
+        $result = $this->model->insert([
             'name' => $this->request->getPost('name')
         ]);
 
         if ($result === false) {
             return redirect()->back()
-                ->with('errors', $model->errors())
+                ->with('errors', $this->model->errors())
                 ->with('warning', 'エラー')
                 ->withInput();
         } else {
@@ -50,16 +54,14 @@ class AnimalsController extends BaseController
 
     public function edit($id)
     {
-        $model = new AnimalsModel;
-        $animal = $model->find($id);
+        $animal = $this->model->find($id);
 
         return view('Animals/edit', ['animal' => $animal]);
     }
 
     public function update($id)
     {
-        $model = new AnimalsModel;
-        $result = $model->update($id, [
+        $result = $this->model->update($id, [
             'name' => $this->request->getPost('name')
         ]);
 
@@ -68,7 +70,7 @@ class AnimalsController extends BaseController
                 ->with('info', '更新しました');
         } else {
             return redirect()->back()
-                ->with('errors', $model->errors())
+                ->with('errors', $this->model->errors())
                 ->with('warning', 'エラー')
                 ->withInput();
         }
@@ -76,11 +78,10 @@ class AnimalsController extends BaseController
 
     public function delete($id)
     {
-        $model = new AnimalsModel;
-        $animal = $model->find($id);
+        $animal = $this->model->find($id);
 
         if ($this->request->getMethod() === 'post') {
-            $model->delete($id);
+            $this->model->delete($id);
             return redirect()->to('/animals')
                 ->with('info', '削除しました');
         }

@@ -5,9 +5,9 @@
         <h1>削除</h1>
         <p>本当に削除しますか？</p>
         <?php echo $this->include('Animals/view'); ?>
-        <?php echo form_open('/animals/delete/' . $animal['id']); ?>
+        <?php echo form_open('/animals/delete/' . $animal->id); ?>
         <?php echo csrf_field(); ?>
-        <a class="btn btn-secondary" href="<?php echo site_url('/animals/show/' . $animal['id']); ?>">いいえ</a>
+        <a class="btn btn-secondary" href="<?php echo site_url('/animals/show/' . $animal->id); ?>">いいえ</a>
         <button class="btn btn-danger">はい</button>
         </form>
     </div>

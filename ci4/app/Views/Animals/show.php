@@ -10,7 +10,7 @@
         <?php } ?>
         <?php echo $this->include('Animals/view'); ?>
         <a class="btn btn-secondary" href="<?php echo site_url('/animals'); ?>">戻る</a>
-        <a class="btn btn-primary" href="<?php echo site_url('/animals/edit/' . $animal['id']); ?>">編集</a>
-        <a class="btn btn-danger" href="<?php echo site_url('/animals/delete/' . $animal['id']); ?>">削除</a>
+        <a class="btn btn-primary" href="<?php echo site_url('/animals/edit/' . $animal->id); ?>">編集</a>
+        <a class="btn btn-danger" href="<?php echo site_url('/animals/delete/' . $animal->id); ?>">削除</a>
     </div>
 <?php $this->endSection(); ?>
