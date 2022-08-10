@@ -4,6 +4,7 @@
     <h1>Delete Task</h1>
     <p>Are you sure?</p>
     <?php echo form_open('/tasks/' . $task->id . '/delete') ?>
+        <?php echo csrf_field(); ?>
         <button>Yes</button>
         <a href="<?php echo site_url('/tasks/' . $task->id) ?>">Cancel</a>
     </form>
