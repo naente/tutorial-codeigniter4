@@ -30,3 +30,11 @@ defined('SHOW_DEBUG_BACKTRACE') || define('SHOW_DEBUG_BACKTRACE', true);
  | release of the framework.
  */
 defined('CI_DEBUG') || define('CI_DEBUG', true);
+
+/*
+ |--------------------------------------------------------------------------
+ | CUSTOM CONSTANTS
+ |--------------------------------------------------------------------------
+ */
+require_once(APPPATH . 'Config' . DIRECTORY_SEPARATOR . 'CustomConstants.php');
+require_once(APPPATH . 'Config' . DIRECTORY_SEPARATOR . $_SERVER['CI_ENVIRONMENT'] . DIRECTORY_SEPARATOR . 'CustomConstants.php');
